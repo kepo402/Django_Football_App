@@ -1,0 +1,14 @@
+{% extends 'football_app/base.html' %}
+
+{% block title %} {{ team.name }} Team{% endblock %}
+
+
+{% block content %}
+<h1>{{ team.name }} Team</h1>
+<h2>Players</h2>
+<ul>
+    {% for player in players %}
+    <li>{{ player.name }} - Goals: {{ player.goals_scored }}, Assists: {{ player.assists }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
