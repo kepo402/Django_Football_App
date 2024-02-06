@@ -1,11 +1,68 @@
 {% extends 'football_app/base.html' %}
 
 {% block title %}Tournaments{% endblock %}
+
 {% block content %}
-<h1>Tournaments</h1>
-<ul>
     {% for tournament in tournaments %}
-    <li><a href="{% url 'team_detail' team_id=tournament.id %}">{{ tournament.name }}</a></li>
+        <h1>{{ tournament.name }} - {{ tournament.start_date }}</h1>
+
+        <!-- Matches for the current tournament -->
+        <h2>Matches</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Live Score</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for match in matches_by_tournament.tournament %}
+                    <tr>
+                        <td>{{ match.date }}</td>
+                        <td>{{ match.live_score }}</td>
+                        <td>{{ match.result }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Assists ranking table -->
+        <h2>Assists Ranking</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Total Assists</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in assists_ranking %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.total_assists }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Goalscorers ranking table -->
+        <h2>Goalscorers Ranking</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Total Goals</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in goalscorers_ranking %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.total_goals }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
     {% endfor %}
-</ul>
 {% endblock %}
